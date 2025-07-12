@@ -8,6 +8,25 @@
     },
     "plugins": [
       [
+        "@stripe/stripe-react-native",
+        {
+          "merchantIdentifier": "merchant.com.couscous",
+          "enableGooglePay": false
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow camera access for sign language recognition."
+        }
+      ],
+      [
+        "expo-av",
+        {
+          "microphonePermission": "Allow microphone access for audio playback."
+        }
+      ],
+      [
         "expo-router",
         {
           "origin": "https://n"
