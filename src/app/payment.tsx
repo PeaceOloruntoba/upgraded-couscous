@@ -16,7 +16,7 @@ export default function Payment() {
       <Text className={`text-2xl font-bold mb-4`}>Add Payment Method</Text>
       <CardField
         accessibilityLabel="Card Details"
-        className="h-12 border-2 border-gray-300 rounded-lg mb-4"
+        // className="h-12 border-2 border-gray-300 rounded-lg mb-4"
       />
       <Button title="Add Card" onPress={handleAdd} />
     </View>
