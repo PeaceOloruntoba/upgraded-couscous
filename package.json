@@ -10,12 +10,16 @@
     "deploy": "npx expo export -p web && npx eas-cli@latest deploy"
   },
   "dependencies": {
+    "@stripe/stripe-react-native": "0.45.0",
     "expo": "^53.0.4",
+    "expo-av": "~15.1.7",
+    "expo-camera": "~16.1.10",
     "expo-constants": "~17.1.4",
     "expo-linking": "~7.1.4",
     "expo-router": "~5.0.3",
     "expo-splash-screen": "~0.30.7",
     "expo-status-bar": "~2.2.3",
+    "firebase": "^11.10.0",
     "nativewind": "^4.0.1",
     "react": "19.0.0",
     "react-dom": "19.0.0",
@@ -24,10 +28,7 @@
     "react-native-safe-area-context": "5.3.0",
     "react-native-screens": "~4.10.0",
     "react-native-web": "^0.20.0",
-    "tailwindcss": "^3.4.0",
-    "expo-camera": "~16.1.10",
-    "@stripe/stripe-react-native": "0.45.0",
-    "expo-av": "~15.1.7"
+    "tailwindcss": "^3.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
