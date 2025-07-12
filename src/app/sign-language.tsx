@@ -1,13 +1,12 @@
 import { View, Text } from 'react-native';
-import { useTailwind } from 'nativewind';
 import { Camera } from 'expo-camera';
 import { useState, useEffect } from 'react';
 import { useStore } from '../store';
 import { useSignLanguage } from '../hooks/sign-language';
-import { SubtitleDisplay, Modal } from '../components';
+import { Modal } from '@/components/Modal';
+import { SubtitleDisplay } from '@/components/SubtitleDisplay';
 
 export default function SignLanguage() {
-  const { tw } = useTailwind();
   const { paymentStatus } = useStore();
   const { processSignLanguage } = useSignLanguage();
   const [hasPermission, setHasPermission] = useState<boolean | null>(null);
@@ -31,11 +30,11 @@ export default function SignLanguage() {
     else alert(`Error: ${result.error}`);
   };
 
-  if (!hasPermission) return <Text style={tw`text-lg`}>Camera permission required</Text>;
+  if (!hasPermission) return <Text className={`text-lg`}>Camera permission required</Text>;
 
   return (
-    <View style={tw`flex-1 bg-gray-100`}>
-      <Camera style={tw`flex-1`} onCameraReady={() => handleProcess({ /* frame data */ })} />
+    <View className={`flex-1 bg-gray-100`}>
+      <Camera className={`flex-1`} onCameraReady={() => handleProcess({ /* frame data */ })} />
       <SubtitleDisplay text={subtitles} />
       <Modal
         visible={modalVisible}
