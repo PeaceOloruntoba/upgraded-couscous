@@ -1,12 +1,11 @@
 import { View, Text } from 'react-native';
-import { useTailwind } from 'nativewind';
-import { Button, Modal } from '../components';
 import { usePayment } from '../hooks/payment';
 import { useStore } from '../store';
 import { useState } from 'react';
+import { Button } from '@/components/Button';
+import { Modal } from '@/components/Modal';
 
 export default function RemoveCard() {
-  const { tw } = useTailwind();
   const { stripePaymentMethodId } = useStore();
   const { removePaymentMethod } = usePayment();
   const [modalVisible, setModalVisible] = useState(false);
@@ -18,9 +17,9 @@ export default function RemoveCard() {
   };
 
   return (
-    <View style={tw`flex-1 justify-center p-4 bg-gray-100`}>
-      <Text style={tw`text-2xl font-bold mb-4`}>Remove Payment Method</Text>
-      <Text style={tw`text-lg mb-4`}>Card: {stripePaymentMethodId}</Text>
+    <View className={`flex-1 justify-center p-4 bg-gray-100`}>
+      <Text className={`text-2xl font-bold mb-4`}>Remove Payment Method</Text>
+      <Text className={`text-lg mb-4`}>Card: {stripePaymentMethodId}</Text>
       <Button title="Remove Card" onPress={() => setModalVisible(true)} />
       <Modal
         visible={modalVisible}
