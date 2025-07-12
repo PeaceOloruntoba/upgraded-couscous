@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --background: #f3f4f6;
+  --text: #000000;
+  --primary: #2563eb;
+  --border: #d1d5db;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-size: 18px;
+}
