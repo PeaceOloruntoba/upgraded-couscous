@@ -1,12 +1,11 @@
 import { View, Text } from 'react-native';
-import { useTailwind } from 'nativewind';
-import { TextInput, Button } from '../components';
-import { useAuth } from '../hooks/auth';
+import { Button } from '@/components/Button';
+import { useAuth } from '@/hooks/auth';
 import { useState } from 'react';
 import { Link } from 'expo-router';
+import { TextInput } from '@/components/TextInput';
 
 export default function Login() {
-  const { tw } = useTailwind();
   const { login, googleSignIn, tikTokSignIn } = useAuth();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -16,8 +15,8 @@ export default function Login() {
   };
 
   return (
-    <View style={tw`flex-1 justify-center p-4 bg-gray-100`}>
-      <Text style={tw`text-2xl font-bold mb-4`}>Log In</Text>
+    <View className={`flex-1 justify-center p-4 bg-gray-100`}>
+      <Text className={`text-2xl font-bold mb-4`}>Log In</Text>
       <TextInput
         accessibilityLabel="Email"
         value={email}
