@@ -16,7 +16,7 @@ export default function Home() {
       >
         Accessibility App
       </Animatable.Text>
-      <View className="space-y-4 w-full max-w-sm">
+      <View className="flex flex-col gap-4 w-full max-w-sm">
         {user ? (
           <Link href="/dashboard" asChild>
             <Button title="Go to Dashboard" className="w-full" />
@@ -24,7 +24,7 @@ export default function Home() {
         ) : (
           <>
             <Link href="/signup" asChild>
-              <Button title="Sign Up" className="w-full" />
+              <Button title="Sign Up" className="w-full bg-blue-600" />
             </Link>
             <Link href="/login" asChild>
               <Button title="Log In" className="w-full bg-transparent border-2 border-blue-500 text-blue-500" />

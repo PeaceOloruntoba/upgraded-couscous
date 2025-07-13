@@ -1,18 +1,22 @@
 import { TouchableOpacity, Text, TouchableOpacityProps } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
+  className?: string;
 }
 
-export const Button = ({ title, ...props }: ButtonProps) => {
+export const Button = ({ title, className = '', ...props }: ButtonProps) => {
   return (
-    <TouchableOpacity
-      {...props}
-      accessibilityRole="button"
-      accessibilityLabel={title}
-      className={`bg-blue-600 p-4 rounded-lg`}
-    >
-      <Text className={`text-white text-lg font-bold text-center`}>{title}</Text>
-    </TouchableOpacity>
+    <Animatable.View animation="pulse" duration={1000}>
+      <TouchableOpacity
+        {...props}
+        accessibilityRole="button"
+        accessibilityLabel={title}
+        className={`bg-gradient-to-r from-blue-500 to-blue-700 p-4 rounded-xl shadow-lg ${className}`}
+      >
+        <Text className="text-white text-lg font-semibold text-center">{title}</Text>
+      </TouchableOpacity>
+    </Animatable.View>
   );
 };
