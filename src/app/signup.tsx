@@ -7,35 +7,60 @@ import { Button } from '@/components/Button';
 
 export default function Signup() {
   const { signup, googleSignIn, tikTokSignIn } = useAuth();
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSignup = async () => {
-    await signup(email, password);
+    try {
+      await signup(email, password, firstName, lastName);
+    } catch (error) {
+      alert(`Error: ${(error as Error).message}`);
+    }
   };
 
   return (
-    <View className={`flex-1 justify-center p-4 bg-gray-100`}>
-      <Text className={`text-2xl font-bold mb-4`}>Sign Up</Text>
-      <TextInput
-        accessibilityLabel="Email"
-        value={email}
-        onChangeText={setEmail}
-        placeholder="Email"
-      />
-      <TextInput
-        accessibilityLabel="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        placeholder="Password"
-      />
-      <Button title="Sign Up" onPress={handleSignup} />
-      <Button title="Sign Up with Google" onPress={googleSignIn} />
-      <Button title="Sign Up with TikTok" onPress={tikTokSignIn} />
-      <Link href="/login" asChild>
-        <Button title="Go to Login" />
-      </Link>
+    <View className="flex-1 justify-center p-6 bg-gradient-to-b from-blue-100 to-white">
+      <Text className="text-3xl font-bold text-gray-800 mb-8 text-center">Create Your Account</Text>
+      <View className="flex flex-col gap-4">
+        <TextInput
+          accessibilityLabel="First Name"
+          value={firstName}
+          onChangeText={setFirstName}
+          placeholder="First Name"
+          className="bg-gray-50"
+        />
+        <TextInput
+          accessibilityLabel="Last Name"
+          value={lastName}
+          onChangeText={setLastName}
+          placeholder="Last Name"
+          className="bg-gray-50"
+        />
+        <TextInput
+          accessibilityLabel="Email"
+          value={email}
+          onChangeText={setEmail}
+          placeholder="Email"
+          keyboardType="email-address"
+          className="bg-gray-50"
+        />
+        <TextInput
+          accessibilityLabel="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          placeholder="Password"
+          className="bg-gray-50"
+        />
+        <Button title="Sign Up" onPress={handleSignup} className="mt-6" />
+        <Button title="Sign Up with Google" onPress={googleSignIn} className="bg-red-500" />
+        <Button title="Sign Up with TikTok" onPress={tikTokSignIn} className="bg-black" />
+        <Link href="/login" asChild>
+          <Button title="Already have an account? Log In" className="bg-transparent border-2 border-blue-500 text-blue-500" />
+        </Link>
+      </View>
     </View>
   );
-}
+};
