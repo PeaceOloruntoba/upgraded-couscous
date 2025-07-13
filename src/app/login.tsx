@@ -1,14 +1,14 @@
-import { View, Text } from 'react-native';
-import { useAuth } from '../hooks/auth';
-import { useState } from 'react';
-import { Link } from 'expo-router';
-import { TextInput } from '@/components/TextInput';
-import { Button } from '@/components/Button';
+import { View, Text } from "react-native";
+import { useAuth } from "../hooks/auth";
+import { useState } from "react";
+import { Link } from "expo-router";
+import { TextInput } from "@/components/TextInput";
+import { Button } from "@/components/Button";
 
 export default function Login() {
   const { login, googleSignIn, tikTokSignIn } = useAuth();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
     try {
@@ -20,7 +20,9 @@ export default function Login() {
 
   return (
     <View className="flex-1 justify-center p-6 bg-gradient-to-b from-blue-100 to-white">
-      <Text className="text-3xl font-bold text-gray-800 mb-8 text-center">Welcome Back</Text>
+      <Text className="text-3xl font-bold text-gray-800 mb-8 text-center">
+        Welcome Back
+      </Text>
       <View className="flex flex-col gap-4">
         <TextInput
           accessibilityLabel="Email"
@@ -38,13 +40,33 @@ export default function Login() {
           placeholder="Password"
           className="bg-gray-50"
         />
-        <Button title="Log In" onPress={handleLogin} className="mt-6" />
-        <Button title="Log In with Google" onPress={googleSignIn} className="bg-red-500" />
-        <Button title="Log In with TikTok" onPress={tikTokSignIn} className="bg-black" />
-        <Link href="/signup" asChild>
-          <Button title="Need an account? Sign Up" className="bg-transparent border-2 border-blue-500 text-blue-500" />
-        </Link>
+        <Button
+          title="Log In"
+          onPress={handleLogin}
+          className="mt-6 bg-blue-600 flex items-center py-4 rounded-lg"
+          textName="text-white font-semibold font-lg"
+        />
+        <Button
+          title="Log In with Google"
+          onPress={googleSignIn}
+          className="bg-red-500 flex items-center py-4 rounded-lg"
+          textName="text-white font-semibold font-lg"
+        />
+        <Button
+          title="Log In with TikTok"
+          onPress={tikTokSignIn}
+          className="bg-black flex items-center py-4 rounded-lg"
+          textName="text-white font-semibold font-lg"
+        />
+        <View className="w-full flex items-end">
+          <Text className="text-lg">
+            Don't have an account?{" "}
+            <Link href="/signup" asChild className="">
+              <Text className="font-semibold text-indigo-600">Sign Up</Text>
+            </Link>
+          </Text>
+        </View>
       </View>
     </View>
   );
-};
+}
