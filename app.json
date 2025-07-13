@@ -31,7 +31,8 @@
         {
           "origin": "https://n"
         }
-      ]
+      ],
+      "expo-web-browser"
     ],
     "name": "upgraded-couscous",
     "slug": "upgraded-couscous"
