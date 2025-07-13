@@ -54,12 +54,33 @@ export default function Signup() {
           placeholder="Password"
           className="bg-gray-50"
         />
-        <Button title="Sign Up" onPress={handleSignup} className="mt-6" />
-        <Button title="Sign Up with Google" onPress={googleSignIn} className="bg-red-500" />
-        <Button title="Sign Up with TikTok" onPress={tikTokSignIn} className="bg-black" />
-        <Link href="/login" asChild>
-          <Button title="Already have an account? Log In" className="bg-transparent border-2 border-blue-500 text-blue-500" />
-        </Link>
+
+        <Button
+          title="Sign Up"
+          onPress={handleSignup}
+          className="mt-6 bg-blue-600 flex items-center py-4 rounded-lg"
+          textName="text-white font-semibold font-lg"
+        />
+        <Button
+          title="Sign Up with Google"
+          onPress={googleSignIn}
+          className="bg-red-500 flex items-center py-4 rounded-lg"
+          textName="text-white font-semibold font-lg"
+        />
+        <Button
+          title="Sign Up with TikTok"
+          onPress={tikTokSignIn}
+          className="bg-black flex items-center py-4 rounded-lg"
+          textName="text-white font-semibold font-lg"
+        />
+        <View className="w-full flex items-end">
+          <Text className="text-lg">
+            Already have an account?{" "}
+            <Link href="/login" asChild className="">
+              <Text className="font-semibold text-indigo-600">Log In</Text>
+            </Link>
+          </Text>
+        </View>
       </View>
     </View>
   );
