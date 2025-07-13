@@ -89,7 +89,7 @@ export const useAuth = () => {
   const tikTokSignIn = async () => {
     const provider = new OAuthProvider("oidc.tiktok");
     const result = await AuthSession.startAsync({
-      authUrl: provider.providerId, // customize this for TikTok OAuth
+      authUrl: provider.providerId,
     });
     if (result?.type === "success") {
       const credential = OAuthProvider.credential(result.params.id_token);
