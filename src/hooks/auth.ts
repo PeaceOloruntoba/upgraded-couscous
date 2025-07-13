@@ -2,18 +2,13 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
-  GoogleAuthProvider,
-  OAuthProvider,
   signInWithCredential,
+  GoogleAuthProvider,
 } from "firebase/auth";
 import { doc, setDoc, getDoc } from "firebase/firestore";
-import * as Google from "expo-auth-session/providers/google";
-import * as WebBrowser from "expo-web-browser";
-import * as AuthSession from "expo-auth-session";
+import * as GoogleSignIn from "expo-google-sign-in";
 import { auth, db } from "../utils/firebaseConfig";
 import { useStore } from "../store";
-
-WebBrowser.maybeCompleteAuthSession();
 
 export const useAuth = () => {
   const { setUser, fetchPaymentStatus } = useStore();
@@ -49,17 +44,11 @@ export const useAuth = () => {
   };
 
   const googleSignIn = async () => {
-    const [request, response, promptAsync] = Google.useAuthRequest({
-      expoClientId: "<YOUR_EXPO_CLIENT_ID>",
-      iosClientId: "<YOUR_IOS_CLIENT_ID>",
-      androidClientId: "<YOUR_ANDROID_CLIENT_ID>",
-      webClientId: "<YOUR_WEB_CLIENT_ID>",
-    });
+    await GoogleSignIn.initAsync();
+    const { type, user } = await GoogleSignIn.signInAsync();
 
-    const result = await promptAsync();
-    if (result?.type === "success") {
-      const { id_token, access_token } = result.authentication!;
-      const credential = GoogleAuthProvider.credential(id_token, access_token);
+    if (type === "success" && user?.auth) {
+      const credential = GoogleAuthProvider.credential(user.auth.idToken, user.auth.accessToken);
       const userCredential = await signInWithCredential(auth, credential);
 
       const displayName = userCredential.user.displayName || "";
@@ -86,40 +75,10 @@ export const useAuth = () => {
     }
   };
 
-  const tikTokSignIn = async () => {
-    const provider = new OAuthProvider("oidc.tiktok");
-    const result = await AuthSession.startAsync({
-      authUrl: provider.providerId,
-    });
-    if (result?.type === "success") {
-      const credential = OAuthProvider.credential(result.params.id_token);
-      const userCredential = await signInWithCredential(auth, credential);
-
-      await setDoc(
-        doc(db, "users", userCredential.user.uid),
-        {
-          email: userCredential.user.email,
-          firstName: "",
-          lastName: "",
-          paymentStatus: "inactive",
-        },
-        { merge: true }
-      );
-
-      setUser({
-        uid: userCredential.user.uid,
-        email: userCredential.user.email,
-        firstName: "",
-        lastName: "",
-      });
-      await fetchPaymentStatus();
-    }
-  };
-
   const logoff = async () => {
     await signOut(auth);
     setUser(null);
   };
 
-  return { signup, login, googleSignIn, tikTokSignIn, logoff };
+  return { signup, login, googleSignIn, logoff };
 };
