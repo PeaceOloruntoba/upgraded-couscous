@@ -3,14 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --background: #f3f4f6;
-  --text: #000000;
+  --background: #ffffff;
+  --text: #1f2937;
   --primary: #2563eb;
-  --border: #d1d5db;
+  --secondary: #ef4444;
+  --accent: #059669;
+  --border: #e5e7eb;
 }
 
 body {
   background-color: var(--background);
   color: var(--text);
   font-size: 18px;
+}
+
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
 }
