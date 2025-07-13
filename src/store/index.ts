@@ -4,7 +4,9 @@ import { doc, getDoc } from 'firebase/firestore';
 import { db } from '../utils/firebaseConfig';
 
 interface UserState {
-  user: { uid: string; email: string | null } | null;
+  user: {
+      firstName: string; uid: string; email: string | null 
+} | null;
   paymentStatus: 'active' | 'inactive';
   stripePaymentMethodId: string | null;
   setUser: (user: { uid: string; email: string | null } | null) => void;
