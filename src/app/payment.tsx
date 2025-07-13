@@ -1,6 +1,7 @@
 import { View, Text } from 'react-native';
 import { CardField } from '@stripe/stripe-react-native';
 import { usePayment } from '../hooks/payment';
+import * as Animatable from 'react-native-animatable';
 import { Button } from '@/components/Button';
 
 export default function Payment() {
@@ -12,13 +13,21 @@ export default function Payment() {
   };
 
   return (
-    <View className={`flex-1 justify-center p-4 bg-gray-100`}>
-      <Text className={`text-2xl font-bold mb-4`}>Add Payment Method</Text>
-      <CardField
-        accessibilityLabel="Card Details"
-        // className="h-12 border-2 border-gray-300 rounded-lg mb-4"
-      />
-      <Button title="Add Card" onPress={handleAdd} />
+    <View className="flex-1 justify-center p-6 bg-gradient-to-b from-blue-100 to-white">
+      <Animatable.Text
+        animation="fadeInDown"
+        className="text-3xl font-bold text-gray-800 mb-8 text-center"
+        accessibilityLabel="Add Payment Method"
+      >
+        Add Payment Method
+      </Animatable.Text>
+      <View className="space-y-4">
+        <CardField
+          accessibilityLabel="Card Details"
+          className="h-12 border-2 border-gray-200 rounded-xl bg-white p-3"
+        />
+        <Button title="Add Card" onPress={handleAdd} className="w-full" />
+      </View>
     </View>
   );
-}
+};
