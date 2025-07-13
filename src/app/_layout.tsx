@@ -2,6 +2,7 @@ import { Slot } from 'expo-router';
 import { useEffect } from 'react';
 import { auth } from '../utils/firebaseConfig';
 import { useStore } from '../store';
+import "../global.css"
 
 export default function Layout() {
   const { setUser, fetchPaymentStatus } = useStore();
