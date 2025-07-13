@@ -27,7 +27,8 @@ export const useStore = create<UserState>((set) => ({
   user: null,
   paymentStatus: "inactive",
   stripePaymentMethodId: null,
-  setUser: (user) => set({ user }),
+  setUser: (user) =>
+    set({ user, paymentStatus: "inactive", stripePaymentMethodId: null }),
   fetchPaymentStatus: async () => {
     const user = auth.currentUser;
     if (user) {
