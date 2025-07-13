@@ -8,27 +8,32 @@ import "../global.css";
 export default function Layout() {
   const { setUser, fetchPaymentStatus } = useStore();
 
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(async (user) => {
-      if (user) {
-        const userDoc = await getDoc(doc(db, "users", user.uid));
-        const data = userDoc.data();
+useEffect(() => {
+  let isMounted = true;
+  const unsubscribe = auth.onAuthStateChanged(async (user) => {
+    if (user && isMounted) {
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      const data = userDoc.data();
 
-        setUser({
-          uid: user.uid,
-          email: user.email,
-          firstName: data?.firstName || "",
-          lastName: data?.lastName || "",
-        });
+      setUser({
+        uid: user.uid,
+        email: user.email,
+        firstName: data?.firstName || "",
+        lastName: data?.lastName || "",
+      });
 
-        await fetchPaymentStatus();
-      } else {
-        setUser(null);
-      }
-    });
+      await fetchPaymentStatus();
+    } else {
+      setUser(null);
+    }
+  });
 
-    return unsubscribe;
-  }, []);
+  return () => {
+    isMounted = false;
+    unsubscribe();
+  };
+}, []);
+
 
   return <Slot />;
 }

@@ -5,7 +5,7 @@ import { Link } from 'expo-router';
 import * as Animatable from 'react-native-animatable';
 import { Button } from '@/components/Button';
 
-export default function Dashboard() {
+export default function DashboardScreen() {
   const { user, paymentStatus, stripePaymentMethodId } = useStore();
   const { logoff } = useAuth();
 

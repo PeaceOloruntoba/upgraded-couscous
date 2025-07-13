@@ -5,7 +5,7 @@ import { Link } from 'expo-router';
 import { TextInput } from '@/components/TextInput';
 import { Button } from '@/components/Button';
 
-export default function Signup() {
+export default function SignupScreen() {
   const { signup, googleSignIn } = useAuth();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
