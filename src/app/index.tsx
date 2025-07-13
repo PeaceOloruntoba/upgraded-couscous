@@ -24,10 +24,10 @@ export default function Home() {
         ) : (
           <>
             <Link href="/signup" asChild>
-              <Button title="Sign Up" className="w-full bg-blue-600" />
+              <Button title="Sign Up" className="w-full bg-blue-600 flex items-center py-2 rounded-lg" textName='text-white font-semibold text-lg' />
             </Link>
             <Link href="/login" asChild>
-              <Button title="Log In" className="w-full bg-transparent border-2 border-blue-500 text-blue-500" />
+              <Button title="Log In" className="w-full bg-transparent border-2 border-blue-500 rounded-lg flex items-center py-2" textName='text-blue-500 font-semibold text-lg' />
             </Link>
           </>
         )}
