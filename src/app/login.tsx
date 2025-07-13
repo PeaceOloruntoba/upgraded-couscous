@@ -1,9 +1,9 @@
 import { View, Text } from 'react-native';
-import { Button } from '@/components/Button';
-import { useAuth } from '@/hooks/auth';
+import { useAuth } from '../hooks/auth';
 import { useState } from 'react';
 import { Link } from 'expo-router';
 import { TextInput } from '@/components/TextInput';
+import { Button } from '@/components/Button';
 
 export default function Login() {
   const { login, googleSignIn, tikTokSignIn } = useAuth();
@@ -11,31 +11,40 @@ export default function Login() {
   const [password, setPassword] = useState('');
 
   const handleLogin = async () => {
-    await login(email, password);
+    try {
+      await login(email, password);
+    } catch (error) {
+      alert(`Error: ${(error as Error).message}`);
+    }
   };
 
   return (
-    <View className={`flex-1 justify-center p-4 bg-gray-100`}>
-      <Text className={`text-2xl font-bold mb-4`}>Log In</Text>
-      <TextInput
-        accessibilityLabel="Email"
-        value={email}
-        onChangeText={setEmail}
-        placeholder="Email"
-      />
-      <TextInput
-        accessibilityLabel="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-        placeholder="Password"
-      />
-      <Button title="Log In" onPress={handleLogin} />
-      <Button title="Log In with Google" onPress={googleSignIn} />
-      <Button title="Log In with TikTok" onPress={tikTokSignIn} />
-      <Link href="/signup" asChild>
-        <Button title="Go to Sign Up" />
-      </Link>
+    <View className="flex-1 justify-center p-6 bg-gradient-to-b from-blue-100 to-white">
+      <Text className="text-3xl font-bold text-gray-800 mb-8 text-center">Welcome Back</Text>
+      <View className="flex flex-col gap-4">
+        <TextInput
+          accessibilityLabel="Email"
+          value={email}
+          onChangeText={setEmail}
+          placeholder="Email"
+          keyboardType="email-address"
+          className="bg-gray-50"
+        />
+        <TextInput
+          accessibilityLabel="Password"
+          value={password}
+          onChangeText={setPassword}
+          secureTextEntry
+          placeholder="Password"
+          className="bg-gray-50"
+        />
+        <Button title="Log In" onPress={handleLogin} className="mt-6" />
+        <Button title="Log In with Google" onPress={googleSignIn} className="bg-red-500" />
+        <Button title="Log In with TikTok" onPress={tikTokSignIn} className="bg-black" />
+        <Link href="/signup" asChild>
+          <Button title="Need an account? Sign Up" className="bg-transparent border-2 border-blue-500 text-blue-500" />
+        </Link>
+      </View>
     </View>
   );
-}
+};
