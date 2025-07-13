@@ -6,19 +6,23 @@ import { useStore } from '../store';
 export const useAuth = () => {
   const { setUser, fetchPaymentStatus } = useStore();
 
-  const signup = async (email: string, password: string) => {
+  const signup = async (email: string, password: string, firstName: string, lastName: string) => {
     const userCredential = await createUserWithEmailAndPassword(auth, email, password);
     await setDoc(doc(db, 'users', userCredential.user.uid), {
       email,
+      firstName,
+      lastName,
       paymentStatus: 'inactive',
     });
-    setUser({ uid: userCredential.user.uid, email: userCredential.user.email });
+    setUser({ uid: userCredential.user.uid, email: userCredential.user.email, firstName, lastName });
     await fetchPaymentStatus();
   };
 
   const login = async (email: string, password: string) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
-    setUser({ uid: userCredential.user.uid, email: userCredential.user.email });
+    const userDoc = await doc(db, 'users', userCredential.user.uid).get();
+    const data = userDoc.data();
+    setUser({ uid: userCredential.user.uid, email: userCredential.user.email, firstName: data?.firstName, lastName: data?.lastName });
     await fetchPaymentStatus();
   };
 
@@ -27,9 +31,16 @@ export const useAuth = () => {
     const userCredential = await signInWithPopup(auth, provider);
     await setDoc(doc(db, 'users', userCredential.user.uid), {
       email: userCredential.user.email,
+      firstName: userCredential.user.displayName?.split(' ')[0] || '',
+      lastName: userCredential.user.displayName?.split(' ')[1] || '',
       paymentStatus: 'inactive',
+    }, { merge: true });
+    setUser({
+      uid: userCredential.user.uid,
+      email: userCredential.user.email,
+      firstName: userCredential.user.displayName?.split(' ')[0] || '',
+      lastName: userCredential.user.displayName?.split(' ')[1] || '',
     });
-    setUser({ uid: userCredential.user.uid, email: userCredential.user.email });
     await fetchPaymentStatus();
   };
 
@@ -38,9 +49,16 @@ export const useAuth = () => {
     const userCredential = await signInWithPopup(auth, provider);
     await setDoc(doc(db, 'users', userCredential.user.uid), {
       email: userCredential.user.email,
+      firstName: '',
+      lastName: '',
       paymentStatus: 'inactive',
+    }, { merge: true });
+    setUser({
+      uid: userCredential.user.uid,
+      email: userCredential.user.email,
+      firstName: '',
+      lastName: '',
     });
-    setUser({ uid: userCredential.user.uid, email: userCredential.user.email });
     await fetchPaymentStatus();
   };
 
