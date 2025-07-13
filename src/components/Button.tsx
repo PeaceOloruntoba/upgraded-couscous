@@ -14,9 +14,9 @@ export const Button = ({ title, textName= '', className = '', ...props }: Button
         {...props}
         accessibilityRole="button"
         accessibilityLabel={title}
-        className={`bg-gradient-to-r from-blue-500 to-blue-700 p-4 rounded-xl shadow-lg ${className}`}
+        className={`${className}`}
       >
-        <Text className={`"${textName} text-lg font-semibold text-center"`}>{title}</Text>
+        <Text className={`${textName}`}>{title}</Text>
       </TouchableOpacity>
     </Animatable.View>
   );
