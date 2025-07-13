@@ -6,7 +6,7 @@ import { TextInput } from '@/components/TextInput';
 import { Button } from '@/components/Button';
 
 export default function Signup() {
-  const { signup, googleSignIn, tikTokSignIn } = useAuth();
+  const { signup, googleSignIn } = useAuth();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -65,12 +65,6 @@ export default function Signup() {
           title="Sign Up with Google"
           onPress={googleSignIn}
           className="bg-red-500 flex items-center py-4 rounded-lg"
-          textName="text-white font-semibold font-lg"
-        />
-        <Button
-          title="Sign Up with TikTok"
-          onPress={tikTokSignIn}
-          className="bg-black flex items-center py-4 rounded-lg"
           textName="text-white font-semibold font-lg"
         />
         <View className="w-full flex items-end">

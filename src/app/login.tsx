@@ -6,7 +6,7 @@ import { TextInput } from "@/components/TextInput";
 import { Button } from "@/components/Button";
 
 export default function Login() {
-  const { login, googleSignIn, tikTokSignIn } = useAuth();
+  const { login, googleSignIn } = useAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -50,12 +50,6 @@ export default function Login() {
           title="Log In with Google"
           onPress={googleSignIn}
           className="bg-red-500 flex items-center py-4 rounded-lg"
-          textName="text-white font-semibold font-lg"
-        />
-        <Button
-          title="Log In with TikTok"
-          onPress={tikTokSignIn}
-          className="bg-black flex items-center py-4 rounded-lg"
           textName="text-white font-semibold font-lg"
         />
         <View className="w-full flex items-end">
